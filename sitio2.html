@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plantilla Avanzada de Presupuesto Financiero</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f9fa;
+        }
+        .container {
+            margin-top: 50px;
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 40px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+        h1, h2 {
+            color: #007bff;
+        }
+        .form-control {
+            border-radius: 10px;
+        }
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+        }
+        .section {
+            margin-bottom: 40px;
+        }
+        .summary {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 30px;
+        }
+        .summary h3 {
+            color: #28a745;
+        }
+        .summary p {
+            font-size: 18px;
+        }
+        table th, table td {
+            text-align: center;
+        }
+        table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+        table th, table td {
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+        table th {
+            background-color: #007bff;
+            color: #fff;
+        }
+        /* Color de fondo azul para las filas de Gastos Fijos, Gastos Variables y Totales */
+        .blue-background {
+            background-color: #007bff;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1 class="text-center">Plantilla Avanzada de Presupuesto Financiero</h1>
+        <p class="text-center">Organiza tus finanzas con facilidad y controla tus ingresos, gastos y ahorros.</p>
+
+        <form id="budgetForm">
+            <div class="section">
+                <h2>Ingresos Mensuales</h2>
+                <div class="mb-3">
+                    <label for="income" class="form-label">Ingreso Total Mensual:</label>
+                    <input type="number" class="form-control" id="income" placeholder="Ejemplo: 2500" required>
+                </div>
+                <div class="mb-3">
+                    <label for="salary" class="form-label">Sueldo:</label>
+                    <input type="number" class="form-control" id="salary" placeholder="Ejemplo: 2000" required>
+                </div>
+                <div class="mb-3">
+                    <label for="additionalIncome" class="form-label">Otros Ingresos (si los hay):</label>
+                    <input type="number" class="form-control" id="additionalIncome" placeholder="Ejemplo: 500">
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>Gastos Mensuales</h2>
+                <div class="mb-3">
+                    <label for="rent" class="form-label">Alquiler/Hipoteca:</label> 
+                    <input type="number" class="form-control" id="rent" placeholder="Ejemplo: 800" required>
+                </div>
+                <div class="mb-3">
+                    <label for="utilities" class="form-label">Servicios (agua, luz, gas.):</label> 
+                    <input type="number" class="form-control" id="utilities" placeholder="Ejemplo: 150" required>
+                </div>
+                <div class="mb-3">
+                    <label for="groceries" class="form-label">Alimentación:</label>
+                    <input type="number" class="form-control" id="groceries" placeholder="Ejemplo: 300" required>
+                </div>
+                <div class="mb-3">
+                    <label for="transport" class="form-label">Transporte:</label>
+                    <input type="number" class="form-control" id="transport" placeholder="Ejemplo: 100" required>
+                </div>
+                <div class="mb-3">
+                    <label for="entertainment" class="form-label">Entretenimiento:</label> 
+                    <input type="number" class="form-control" id="entertainment" placeholder="Ejemplo: 150" required>
+                </div>
+                <div class="mb-3">
+                    <label for="subscriptions" class="form-label">Suscripciones (Netflix, Spotify):</label> 
+                    <input type="number" class="form-control" id="subscriptions" placeholder="Ejemplo: 50">
+                </div>
+                <div class="mb-3">
+                    <label for="clothing" class="form-label">Ropa:</label> 
+                    <input type="number" class="form-control" id="clothing" placeholder="Ejemplo: 75">
+                </div>
+                <div class="mb-3">
+                    <label for="otherExpenses" class="form-label">Otros Gastos:</label>
+                    <input type="number" class="form-control" id="otherExpenses" placeholder="Ejemplo: 100">
+                </div>
+            </div>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Categoría</th>
+                        <th>Ingresos</th>
+                        <th>Gastos Fijos</th>
+                        <th>Gastos Variables</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Ingresos</td>
+                        <td id="incomeTable"></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Sueldo</td>
+                        <td id="salaryTable"></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Otros ingresos</td>
+                        <td id="additionalIncomeTable"></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr class="blue-background">
+                        <td>Gastos Fijos</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Alquiler/Hipoteca</td>
+                        <td></td>
+                        <td id="rentTable"></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Servicios (luz, agua, gas)</td>
+                        <td></td>
+                        <td id="utilitiesTable"></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Transporte</td>
+                        <td></td>
+                        <td id="transportTable"></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Suscripciones (Netflix, Spotify)</td>
+                        <td></td>
+                        <td id="subscriptionsTable"></td>
+                        <td></td>
+                    </tr>
+                    <tr class="blue-background">
+                        <td>Gastos Variables</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Alimentación</td> 
+                        <td></td>
+                        <td></td>
+                        <td id="groceriesTable"></td>
+                    </tr>
+                    <tr>
+                        <td>Entretenimiento</td>
+                        <td></td>
+                        <td></td>
+                        <td id="entertainmentTable"></td>
+                    </tr>
+                    <tr>
+                        <td>Ropa</td>
+                        <td></td>
+                        <td></td>
+                        <td id="clothingTable"></td>
+                    </tr>
+                    <tr>
+                        <td>Otros Gastos</td> 
+                        <td></td>
+                        <td></td>
+                        <td id="otherExpensesTable"></td>
+                    </tr>
+                    <tr class="blue-background">
+                        <td>Totales</td>
+                        <td id="totalIncomeTable"></td>
+                        <td id="totalExpensesTable"></td>
+                        <td id="totalSavingsTable"></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="section">
+                <h2>Ahorros y Planificación Financiera</h2>
+                <div class="mb-3">
+                    <label for="savingsGoal" class="form-label">Meta de Ahorro Mensual:</label>
+                    <input type="number" class="form-control" id="savingsGoal" placeholder="Ejemplo: 300" required>
+                </div>
+                <div class="mb-3">
+                    <label for="investment" class="form-label">Inversión Mensual (si aplica):</label>
+                    <input type="number" class="form-control" id="investment" placeholder="Ejemplo: 200">
+                </div>
+            </div>
+
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary">Generar Resumen de Presupuesto</button>
+            </div>
+        </form>
+
+        <div id="budgetSummary" class="summary" style="display: none;">
+            <h3>Resumen del Presupuesto</h3>
+            <p><strong>Ingresos Totales:</strong> $<span id="totalIncome"></span></p>
+            <p><strong>Gastos Totales:</strong> $<span id="totalExpenses"></span></p>
+            <p><strong>Ahorros Planeados:</strong> $<span id="totalSavings"></span></p>
+            <p><strong>Inversión Mensual:</strong> $<span id="totalInvestment"></span></p>
+
+            <h3>Gráfico de Distribución de Gastos</h3>
+            <canvas id="budgetChart" height="300"></canvas>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('budgetForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            // Obtener los valores del formulario
+            const income = parseFloat(document.getElementById('income').value) || 0;
+            const salary = parseFloat(document.getElementById('salary').value) || 0;
+            const additionalIncome = parseFloat(document.getElementById('additionalIncome').value) || 0;
+            const rent = parseFloat(document.getElementById('rent').value) || 0;
+            const utilities = parseFloat(document.getElementById('utilities').value) || 0;
+            const groceries = parseFloat(document.getElementById('groceries').value) || 0;
+            const transport = parseFloat(document.getElementById('transport').value) || 0;
+            const entertainment = parseFloat(document.getElementById('entertainment').value) || 0;
+            const subscriptions = parseFloat(document.getElementById('subscriptions').value) || 0;
+            const clothing = parseFloat(document.getElementById('clothing').value) || 0;
+            const otherExpenses = parseFloat(document.getElementById('otherExpenses').value) || 0;
+            const savingsGoal = parseFloat(document.getElementById('savingsGoal').value) || 0;
+            const investment = parseFloat(document.getElementById('investment').value) || 0;
+
+            // Calcular totales
+            const totalIncome = income + salary + additionalIncome;
+            const totalExpenses = rent + utilities + groceries + transport + entertainment + subscriptions + clothing + otherExpenses;
+            const totalSavings = savingsGoal;
+            const totalInvestment = investment;
+
+            // Mostrar los valores en la tabla
+            document.getElementById('incomeTable').innerText = totalIncome.toFixed(2);
+            document.getElementById('salaryTable').innerText = salary.toFixed(2);
+            document.getElementById('additionalIncomeTable').innerText = additionalIncome.toFixed(2);
+            document.getElementById('rentTable').innerText = rent.toFixed(2);
+            document.getElementById('utilitiesTable').innerText = utilities.toFixed(2);
+            document.getElementById('groceriesTable').innerText = groceries.toFixed(2);
+            document.getElementById('transportTable').innerText = transport.toFixed(2);
+            document.getElementById('entertainmentTable').innerText = entertainment.toFixed(2);
+            document.getElementById('subscriptionsTable').innerText = subscriptions.toFixed(2);
+            document.getElementById('clothingTable').innerText = clothing.toFixed(2);
+            document.getElementById('otherExpensesTable').innerText = otherExpenses.toFixed(2);
+
+            document.getElementById('totalIncomeTable').innerText = totalIncome.toFixed(2);
+            document.getElementById('totalExpensesTable').innerText = totalExpenses.toFixed(2);
+            document.getElementById('totalSavingsTable').innerText = totalSavings.toFixed(2);
+
+            // Mostrar el gráfico de distribución de gastos
+            const ctx = document.getElementById('budgetChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: ['Alquiler', 'Servicios', 'Alimentación', 'Transporte', 'Ocio', 'Suscripciones', 'Ropa', 'Otros Gastos'],
+                    datasets: [{
+                        data: [rent, utilities, groceries, transport, entertainment, subscriptions, clothing, otherExpenses],
+                        backgroundColor: ['#007bff', '#28a745', '#ffc107', '#dc3545', '#17a2b8', '#6c757d', '#007bff', '#ffc107'],
+                        hoverBackgroundColor: ['#0056b3', '#218838', '#e0a800', '#c82333', '#117a8b', '#5a6268', '#0056b3', '#e0a800']
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        },
+                    }
+                }
+            });
+
+            // Mostrar el resumen y el gráfico
+            document.getElementById('budgetSummary').style.display = 'block';
+        });
+    </script>
+
+</body>
+</html>

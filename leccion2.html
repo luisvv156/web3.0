@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cómo Funciona el Crédito</title>
+    <link rel="stylesheet" href="css/styletest.css">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f1f3f5;
+            color: #495057;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            justify-content: flex-start;
+        }
+        .container {
+            width: 100%;
+            padding: 20px;
+            box-sizing: border-box;
+            overflow-y: auto;
+            height: calc(100vh - 60px); /* Ajusta la altura */
+        }
+        h1 {
+            font-size: 2.5rem;
+            color: #007bff;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        h2 {
+            font-size: 2rem;
+            color: #007bff;
+            margin-bottom: 15px;
+        }
+        ol, ul {
+            margin-left: 20px;
+            font-size: 1.1rem;
+        }
+        p {
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        .activity {
+            background-color: #e9f7fe;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #007bff;
+            margin-bottom: 20px;
+        }
+        .btn {
+            display: inline-block;
+            background-color: #007bff;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+        .btn:hover {
+            background-color: #0056b3;
+        }
+        footer {
+            text-align: center;
+            margin-top: 40px;
+        }
+        footer p {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        /* Imágenes */
+        .image-container {
+            position: relative;
+            text-align: center;
+            margin: 20px 0;
+        }
+        .image-container img {
+            max-width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        .image-container .note {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: rgba(0, 123, 255, 0.7);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-weight: bold;
+        }
+
+        /* Notas flotantes */
+        .floating-note {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            max-width: 80%;
+            display: none;
+            z-index: 999;
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+
+        .floating-note.active {
+            display: block;
+        }
+
+        .close-note {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            color: #007bff;
+        }
+
+        /* Estilos del formulario */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .form-group textarea, .form-group input {
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            font-size: 1rem;
+            margin-top: 8px;
+            box-sizing: border-box;
+            transition: border 0.3s ease;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            height: 120px;
+        }
+
+        .form-group input:focus, .form-group textarea:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+
+        .form-group button {
+            background-color: #28a745;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .form-group button:hover {
+            background-color: #218838;
+        }
+
+        /* Hover en la imagen para mostrar notas flotantes */
+        .image-container:hover .note {
+            display: block;
+        }
+
+        .image-container .note {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Cómo Funciona el Crédito</h1>
+        <p>El crédito es un aspecto fundamental de las finanzas personales. Te permitirá acceder a productos y servicios que no podrías pagar de inmediato, como préstamos, tarjetas de crédito y más. Aprende cómo se calcula tu puntuación de crédito y cómo impacta tus decisiones financieras.</p>
+
+        <h2>¿Qué es una Puntuación de Crédito?</h2>
+        <div class="image-container">
+            <img src="img/untuacion-credito.jpg" alt="Puntuación de Crédito">
+            <div class="note">La puntuación refleja tu historial financiero.</div>
+        </div>
+        <p>La puntuación de crédito es un número que refleja tu historial financiero y la probabilidad de que pagues tus deudas a tiempo. Se calcula a partir de diversos factores, como tu historial de pagos, la cantidad de deuda que tienes, y la duración de tu historial crediticio.</p>
+        
+        <h2>Guía Paso a Paso</h2>
+        <ol>
+            <li><strong>Solicita tu reporte de crédito anual:</strong> Puedes obtenerlo de manera gratuita una vez al año. Esto te permitirá conocer tu puntuación actual y cualquier error o irregularidad en tu historial.</li>
+            <li><strong>Revisa tu puntuación de crédito:</strong> Existen diversas agencias que calculan tu puntuación de crédito, como FICO y VantageScore. La puntuación varía de 300 a 850, siendo un valor más alto indicativo de un mejor historial crediticio.</li>
+            <li><strong>Identifica áreas de mejora:</strong> Si tienes una puntuación baja, identifica las áreas que necesitan atención, como reducir deudas, pagar a tiempo y no hacer solicitudes frecuentes de crédito.</li>
+        </ol>
+
+        <h2>Factores que Afectan Tu Puntuación de Crédito</h2>
+        <p>Tu puntuación de crédito se ve afectada por varios factores. A continuación, te explicamos los más importantes:</p>
+        <ul>
+            <li><strong>Historial de pagos (35%):</strong> Pagar a tiempo todas tus deudas es fundamental para mantener una buena puntuación.</li>
+            <li><strong>Cantidad de deuda pendiente (30%):</strong> Mientras menos deuda tengas, mejor será tu puntuación.</li>
+            <li><strong>Duración del historial crediticio (15%):</strong> Un historial más largo y con buen comportamiento es mejor para tu puntuación.</li>
+            <li><strong>Tipo de crédito utilizado (10%):</strong> Una combinación de diferentes tipos de crédito (tarjetas, préstamos personales, hipotecas) puede mejorar tu puntuación.</li>
+            <li><strong>Solicitudes recientes de crédito (10%):</strong> Demasiadas solicitudes de crédito en un corto periodo pueden afectar negativamente tu puntuación.</li>
+        </ul>
+
+        <h2>Impacto de una Buena Puntuación de Crédito</h2>
+        <div class="image-container">
+            <img src="img/impacto-credito.png" alt="Impacto de una Buena Puntuación de Crédito">
+            <div class="note">Una buena puntuación abre puertas a mejores oportunidades financieras.</div>
+        </div>
+        <p>Una buena puntuación de crédito puede ayudarte a obtener mejores condiciones en productos financieros, tales como tasas de interés más bajas en préstamos e hipotecas. También puede influir en la aprobación de alquileres y empleos que requieren una verificación de crédito.</p>
+
+        <h2>Recursos Adicionales</h2>
+        <p>Para más información sobre cómo gestionar tu crédito y mejorar tu puntuación, visita los siguientes sitios:</p>
+        <ul>
+            <li><a href="https://www.annualcreditreport.com" target="_blank">AnnualCreditReport.com</a>: Obtén tu reporte de crédito gratuito una vez al año.</li>
+            <li><a href="https://www.myfico.com" target="_blank">MyFICO</a>: Aprende más sobre tu puntuación FICO y cómo mejorarla.</li>
+        </ul>
+
+        <div class="activity">
+            <h2>Actividad de Grupo: Mejora Tu Crédito</h2>
+            <p>Contesta las siguientes preguntas para reflexionar sobre cómo mejorar tu puntuación de crédito. Recuerda que estas acciones pueden ayudarte a mejorar tu situación financiera.</p>
+
+            <form action="#" method="POST">
+                <div class="form-group">
+                    <label for="respuesta1">¿Cómo mejorarías tu historial de pagos?</label>
+                    <textarea id="respuesta1" name="respuesta1" placeholder="Escribe aquí tu respuesta..." required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="respuesta2">¿Qué estrategias utilizarías para reducir tu deuda rápidamente?</label>
+                    <textarea id="respuesta2" name="respuesta2" placeholder="Escribe aquí tu respuesta..." required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="respuesta3">¿Por qué es importante mantener un historial crediticio largo?</label>
+                    <textarea id="respuesta3" name="respuesta3" placeholder="Escribe aquí tu respuesta..." required></textarea>
+                </div>
+                <div class="form-group">
+                    <button type="submit">Enviar Respuestas</button>
+                </div>
+            </form>
+        </div>
+
+        <a href="about.html" class="btn">Volver a las lecciones</a>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Finanzas Personales. Todos los derechos reservados.</p>
+    </footer>
+
+    <div class="floating-note" id="floatingNote">
+        <span class="close-note" onclick="closeNote()">x</span>
+        <h3>Nota importante:</h3>
+        <p>Recuerda que una puntuación de crédito baja no es el fin del mundo, pero sí es importante tomar medidas para mejorarla a lo largo del tiempo. ¡Empieza hoy mismo!</p>
+    </div>
+
+    <script>
+        // Mostrar la nota flotante después de un cierto tiempo
+        setTimeout(function() {
+            document.getElementById("floatingNote").classList.add("active");
+        }, 5000); // Aparece después de 5 segundos
+
+        function closeNote() {
+            document.getElementById("floatingNote").classList.remove("active");
+        }
+    </script>
+</body>
+</html>

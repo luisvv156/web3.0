@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Preparación para la Jubilación</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Incluyendo la librería de gráficos -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<style>
+    body {
+        font-family: 'Open Sans', sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f7fa;
+        color: #333;
+    }
+
+    .container {
+        max-width: 1200px;
+        margin: auto;
+        padding: 20px;
+    }
+
+    header {
+        background: linear-gradient(135deg, #28a745, #218838);
+        color: white;
+        padding: 60px 20px;
+        border-radius: 8px;
+        text-align: center;
+        margin-bottom: 40px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    header h1 {
+        font-size: 3.5em;
+        margin-bottom: 10px;
+    }
+
+    header p {
+        font-size: 1.3em;
+        font-weight: 300;
+    }
+
+    .section {
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        padding: 25px;
+        margin-bottom: 30px;
+    }
+
+    .section h2 {
+        color: #28a745;
+        font-size: 2em;
+        margin-bottom: 20px;
+        position: relative;
+    }
+
+    .section h2::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        height: 3px;
+        background: #218838;
+        border-radius: 5px;
+    }
+
+    .section ul {
+        list-style: none;
+        padding-left: 0;
+    }
+
+    .section ul li {
+        margin-bottom: 15px;
+        font-size: 1.1em;
+        line-height: 1.6;
+    }
+
+    .section ul li i {
+        color: #28a745;
+        margin-right: 10px;
+    }
+
+    /* Comparativa de impuestos */
+    .table-container {
+        overflow-x: auto;
+        margin-top: 30px;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        text-align: left;
+    }
+
+    table th, table td {
+        padding: 12px;
+        border: 1px solid #ddd;
+    }
+
+    table th {
+        background-color: #28a745;
+        color: white;
+    }
+
+    table tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+
+    .tips-box {
+        background-color: #e6f7e6;
+        padding: 20px;
+        border-radius: 8px;
+        margin: 20px 0;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .tip {
+        padding: 10px;
+        margin-bottom: 15px;
+        background-color: #ffffff;
+        border-left: 5px solid #28a745;
+    }
+
+    .btn {
+        display: inline-block;
+        padding: 12px 18px;
+        border-radius: 5px;
+        background-color: #28a745;
+        color: white;
+        text-align: center;
+        text-decoration: none;
+        font-size: 1.2em;
+        transition: background-color 0.3s, box-shadow 0.3s;
+        cursor: pointer;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .btn:hover {
+        background-color: #218838;
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Infografía de planificación fiscal */
+    .infographic {
+        display: flex;
+        justify-content: space-around;
+        margin-top: 30px;
+    }
+
+    .infographic-item {
+        width: 250px;
+        padding: 20px;
+        text-align: center;
+        background-color: #ffffff;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        transition: transform 0.3s ease;
+    }
+
+    .infographic-item:hover {
+        transform: scale(1.05);
+    }
+
+    .infographic-item i {
+        font-size: 3em;
+        color: #28a745;
+        margin-bottom: 15px;
+    }
+
+    .progress-bar-container {
+        background-color: #f3f3f3;
+        border-radius: 10px;
+        margin: 20px 0;
+        padding: 5px;
+    }
+
+    .progress-bar {
+        width: 0;
+        height: 30px;
+        background-color: #28a745;
+        border-radius: 10px;
+        transition: width 0.5s;
+    }
+
+
+    /* Estilo de la actividad de desarrollo */
+    .activity {
+        background: #ffffff;
+        border-radius: 10px;
+        padding: 30px;
+        margin-bottom: 40px;
+        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease-in-out;
+    }
+
+    .activity:hover {
+        transform: scale(1.02);
+    }
+
+    .activity h2 {
+        color: #28a745;
+        font-size: 2.5em;
+        margin-bottom: 20px;
+        display: flex;
+        align-items: center;
+    }
+
+    .activity h2 i {
+        margin-right: 15px;
+        font-size: 1.3em;
+    }
+
+    .activity p {
+        font-size: 1.2em;
+        font-weight: 300;
+        color: #555;
+    }
+
+    .progress-bar-container {
+        margin-top: 30px;
+        background-color: #e6f7e5;
+        border-radius: 25px;
+        height: 25px;
+        width: 100%;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .progress-bar {
+        height: 100%;
+        width: 0;
+        background: linear-gradient(to right, #28a745, #218838);
+        border-radius: 25px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        transition: width 0.5s ease-out;
+    }
+
+    ul {
+        margin-top: 40px;
+        list-style: none;
+        padding-left: 0;
+    }
+
+    ul li {
+        font-size: 1.1em;
+        margin-bottom: 15px;
+        color: #333;
+    }
+
+    ul li strong {
+        color: #28a745;
+    }
+
+    footer {
+        margin-top: 50px;
+        text-align: center;
+    }
+
+    .btn {
+        display: inline-block;
+        background-color: #28a745;
+        color: #fff;
+        font-size: 1.2em;
+        padding: 12px 25px;
+        border-radius: 8px;
+        text-decoration: none;
+        box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+        transition: background-color 0.3s, transform 0.3s;
+    }
+
+    .btn:hover {
+        background-color: #218838;
+        transform: scale(1.05);
+    }
+            /* Infografía de planificación fiscal */
+            .infographic {
+        display: flex;
+        justify-content: space-around;
+        margin-top: 30px;
+        position: relative;
+    }
+
+    .infographic-item {
+        width: 250px;
+        padding: 20px;
+        text-align: center;
+        background-color: #ffffff;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        transition: transform 0.3s ease;
+        position: relative;
+    }
+
+    .infographic-item:hover {
+        transform: scale(1.05);
+    }
+
+    .infographic-item i {
+        font-size: 3em;
+        color: #28a745;
+        margin-bottom: 15px;
+    }
+
+    /* Estilo de las notas flotantes */
+    .tooltip {
+        position:unset;
+        top: 50%;
+        left: 100%;
+        transform: translateY(-50%);
+        background-color: #fff;
+        border: 1px solid #28a745;
+        color: #333;
+        padding: 10px;
+        width: 200px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        border-radius: 5px;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s ease, visibility 0.3s ease;
+        z-index: 10;
+    }
+
+    .tooltip::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: -8px;
+        margin-top: -5px;
+        border-width: 5px;
+        border-style: solid;
+        border-color: transparent #28a745 transparent transparent;
+    }
+
+    .infographic-item:hover .tooltip {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    /* Efecto de aparición gradual */
+    .infographic-item .tooltip {
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+</style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Preparación para la Jubilación</h1>
+            <p>Conoce la importancia de planificar tu jubilación y cómo hacerlo de manera efectiva.</p>
+        </header>
+
+        <section class="section intro">
+            <h2>¿Por qué es importante planificar tu jubilación?</h2>
+            <p>La jubilación es una de las etapas más importantes en la vida financiera de cualquier persona. Para asegurar una vida cómoda en tu retiro, es esencial comenzar a ahorrar e invertir con antelación. Aquí exploraremos las mejores estrategias para hacerlo.</p>
+            <div class="info-box">
+                <h3>Datos clave sobre la jubilación:</h3>
+                <ul>
+                    <li><strong>Edad de jubilación promedio:</strong> 65 años</li>
+                    <li><strong>Porcentaje recomendado para ahorrar al mes:</strong> 15% de tus ingresos</li>
+                    <li><strong>Promedio de ahorro para la jubilación:</strong> 1.5 veces tu salario anual</li>
+                </ul>
+            </div>
+        </section>
+
+
+
+        <section class="section strategies">
+            <h2>Estrategias de Ahorro para la Jubilación</h2>
+            <p>Existen varias estrategias que puedes implementar para maximizar tus ahorros para la jubilación. Aquí te presentamos las más efectivas:</p>
+            <ul>
+                <li>Contribuye regularmente a un plan de pensiones.</li>
+                <li>Considera abrir cuentas de ahorro específicamente para la jubilación.</li>
+                <li>Invierte en activos que generen ingresos pasivos, como bienes raíces o fondos mutuos.</li>
+            </ul>
+        </section>
+
+        <section class="section comparison">
+            <h2>Tabla Comparativa: Tipos de Cuentas para la Jubilación</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Tipo de Cuenta</th>
+                        <th>Ventajas</th>
+                        <th>Desventajas</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Cuenta de Pensiones</td>
+                        <td>Beneficios fiscales, fácil de gestionar</td>
+                        <td>Limitaciones en el retiro temprano</td>
+                    </tr>
+                    <tr>
+                        <td>Cuenta de Ahorro Individual</td>
+                        <td>Acceso más flexible a los fondos</td>
+                        <td>Menos ventajas fiscales</td>
+                    </tr>
+                    <tr>
+                        <td>Fondos de Inversión</td>
+                        <td>Potencial de alto rendimiento, diversificación</td>
+                        <td>Riesgo de fluctuación del mercado</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Nueva sección de beneficios -->
+        <section class="section benefits">
+            <h2>Beneficios de la Planificación Financiera para la Jubilación</h2>
+            <p>Una planificación adecuada para la jubilación no solo garantiza estabilidad financiera, sino que también proporciona tranquilidad. Estos son algunos de los beneficios clave:</p>
+            <ul>
+                <li><strong>Reducción del estrés financiero:</strong> Saber que tienes un plan puede aliviar la ansiedad sobre el futuro.</li>
+                <li><strong>Mayor seguridad:</strong> Garantizas una fuente de ingresos constante después de la jubilación.</li>
+                <li><strong>Mayor calidad de vida:</strong> Disfruta de un estilo de vida cómodo y sin preocupaciones económicas.</li>
+            </ul>
+        </section>
+
+        <!-- Nueva sección sobre impacto de la inflación -->
+        <section class="section inflation">
+            <h2>Impacto de la Inflación en los Ahorros para la Jubilación</h2>
+            <p>La inflación es un factor crucial en la planificación financiera. A lo largo de los años, el valor de tu dinero disminuye, lo que puede afectar tus ahorros para la jubilación. Aquí te mostramos cómo puedes proteger tus ahorros de la inflación:</p>
+            <ul>
+                <li><strong>Inversiones en activos inflacionarios:</strong> Como bienes raíces o metales preciosos.</li>
+                <li><strong>Ajustes periódicos a tu plan de ahorro:</strong> Aumenta tus aportaciones según el aumento de los costos.</li>
+            </ul>
+        </section>
+
+        <section class="section resources">
+            <h2>Recursos para la Planificación de la Jubilación</h2>
+            <p>Consulta las siguientes herramientas y guías para ayudarte a planificar tu jubilación:</p>
+            <ul>
+                <li><a href="sitio3.html" target="_blank">Guía de planificación para la jubilación</a></li>
+                <li><a href="sitio4.html" target="_blank">Curso gratuito sobre inversiones</a></li>
+            </ul>
+        </section>
+
+        <a href="about.html" class="btn">Volver a las lecciones</a>
+    </div>
+    </script>
+</body>
+</html>

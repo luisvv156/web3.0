@@ -1,0 +1,97 @@
+/* Reset de márgenes y paddings */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Estilo del cuerpo */
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    background-color: #f4f4f4; /* Color de fondo suave */
+    color: #333;
+}
+
+/* Contenedor principal */
+.container {
+    max-width: 500px;
+    margin: 50px auto;
+    padding: 30px;
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    text-align: center; /* Centrar texto */
+}
+
+/* Estilo del encabezado */
+h1 {
+    color: #007bff; /* Color azul */
+    margin-bottom: 20px;
+    font-size: 2.5em;
+}
+
+/* Estilo de los grupos de formulario */
+.form-group {
+    margin-bottom: 20px;
+    text-align: left; /* Alinear texto a la izquierda */
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+input[type="number"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1em;
+    transition: border-color 0.3s;
+}
+
+input[type="number"]:focus {
+    border-color: #007bff; /* Cambiar color del borde al enfocar */
+}
+
+/* Estilo del botón */
+.btn {
+    display: inline-block;
+    padding: 10px 15px;
+    background-color: #007bff; /* Color azul */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    text-align: center;
+    transition: background-color 0.3s ease;
+    font-weight: bold;
+    width: 100%; /* Botón ocupa todo el ancho */
+}
+
+.btn:hover {
+    background-color: #0056b3; /* Color azul más oscuro al pasar el mouse */
+}
+
+/* Estilo del resultado */
+.result {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #e0f7fa; /* Color de fondo claro */
+    border: 1px solid #007bff; /* Borde azul */
+    border-radius: 5px;
+    text-align: center;
+    font-size: 1.2em;
+    color: #333;
+}
+
+/* Estilo del botón secundario */
+.btn-secondary {
+    background-color: #6c757d; /* Color gris */
+}
+
+.btn-secondary:hover {
+    background-color: #5a6268; /* Color gris más oscuro al pasar el mouse */
+}

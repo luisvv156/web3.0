@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ahorro e Inversión</title>
+    <link rel="stylesheet" href="css/styletest.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+        }
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 20px;
+        }
+        header {
+            background: #007bff;
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .section {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .form-label {
+            font-weight: bold;
+        }
+        .btn {
+            display: inline-block;
+            padding: 10px 15px;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+        }
+        .btn:hover {
+            background-color: #0056b3;
+        }
+        .d-flex {
+            display: flex;
+            gap: 20px;
+        }
+        .section img {
+            max-width: 100%;
+            border-radius: 8px;
+        }
+        .aside-section {
+            margin-top: 20px;
+        }
+        .aside-section ul {
+            padding-left: 20px;
+        }
+        footer {
+            margin-top: 20px;
+            text-align: center;
+        }
+        .chart-container {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Encabezado principal -->
+        <header>
+            <h1>Ahorro e Inversión</h1>
+            <p>Descubre cómo gestionar tus finanzas para un futuro más seguro.</p>
+        </header>
+
+        <!-- Contenido principal -->
+        <div class="d-flex">
+            <!-- Simulador de ahorro -->
+            <section class="section w-50">
+                <h2 class="text-primary">Simulador de Ahorros</h2>
+                <p>Completa los campos a continuación para calcular tu progreso financiero:</p>
+
+                <form id="savings-simulator">
+                    <!-- Definición de metas -->
+                    <h3>Definición de Metas</h3>
+                    <div class="mb-3">
+                        <label for="goal-amount" class="form-label">Monto a ahorrar:</label>
+                        <input type="number" id="goal-amount" name="goal-amount" class="form-control" placeholder="Ingresa tu objetivo monetario" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="time-frame" class="form-label">Plazo (en meses):</label>
+                        <input type="number" id="time-frame" name="time-frame" class="form-control" placeholder="Ingresa el horizonte temporal" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="interest-rate" class="form-label">Tasa de interés esperada (%):</label>
+                        <input type="number" id="interest-rate" name="interest-rate" class="form-control" placeholder="Opcional">
+                    </div>
+
+                    <!-- Datos de entrada -->
+                    <h3>Datos de Entrada</h3>
+                    <div class="mb-3">
+                        <label for="initial-savings" class="form-label">Ahorro inicial:</label>
+                        <input type="number" id="initial-savings" name="initial-savings" class="form-control" placeholder="Ingresa tu ahorro inicial" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="monthly-savings" class="form-label">Ahorro mensual:</label>
+                        <input type="number" id="monthly-savings" name="monthly-savings" class="form-control" placeholder="Ingresa tu ahorro mensual" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="variable-expenses" class="form-label">Gastos variables (mensuales):</label>
+                        <input type="number" id="variable-expenses" name="variable-expenses" class="form-control" placeholder="Opcional">
+                    </div>
+
+                    <button type="button" class="btn w-100" onclick="simulateSavings()">Simular</button>
+                    <button type="reset" class="btn w-100 mt-2" style="background-color: #6c757d;">Reiniciar</button>
+                </form>
+
+                <div id="result" class="mt-4"></div>
+
+                <!-- Gráfico de resultados -->
+                <div class="chart-container">
+                    <canvas id="savingsChart" style="max-width: 100%; height: 400px;"></canvas>
+                </div>
+            </section>
+
+            <!-- Consejos y recursos -->
+            <aside class="section w-50">
+                <h2 class="text-primary">Consejos Financieros</h2>
+                <ul>
+                    <li>Establece prioridades claras para tus objetivos financieros.</li>
+                    <li>Minimiza los gastos innecesarios para aumentar tu capacidad de ahorro.</li>
+                    <li>Considera opciones de inversión que se ajusten a tu perfil de riesgo.</li>
+                    <li>Consulta regularmente tu progreso financiero.</li>
+                </ul>
+
+                <div class="aside-section">
+                    <h3>Recursos Educativos</h3>
+                    <p>Consulta recursos adicionales para aprender más sobre estrategias de ahorro e inversión:</p>
+                    <a href="https://educacionfinanciera.com" target="_blank" class="btn">Explorar Recursos</a>
+                </div>
+
+                <div class="aside-section">
+                    <h3>Inspiración</h3>
+                    <img class="img-fluid" src="img/financiero.jpg" alt="">
+                    <p>Visualiza tus metas para mantenerte motivado en tu camino hacia el éxito financiero.</p>
+                </div>
+            </aside>
+        </div>
+
+        <!-- Botón para volver a las lecciones -->
+        <footer>
+            <a href="about.html" class="btn">Volver a las lecciones</a>
+        </footer>
+    </div>
+
+    <script>
+        function simulateSavings() {
+            const goalAmount = parseFloat(document.getElementById('goal-amount').value);
+            const timeFrame = parseFloat(document.getElementById('time-frame').value);
+            const interestRate = parseFloat(document.getElementById('interest-rate').value) || 0;
+            const initialSavings = parseFloat(document.getElementById('initial-savings').value);
+            const monthlySavings = parseFloat(document.getElementById('monthly-savings').value);
+            const variableExpenses = parseFloat(document.getElementById('variable-expenses').value) || 0;
+
+            if (isNaN(goalAmount) || isNaN(timeFrame) || isNaN(initialSavings) || isNaN(monthlySavings)) {
+                document.getElementById('result').innerHTML = '<p class="text-danger">Por favor, completa todos los campos obligatorios correctamente.</p>';
+                return;
+            }
+
+            const effectiveMonthlySavings = monthlySavings - variableExpenses;
+            if (effectiveMonthlySavings <= 0) {
+                document.getElementById('result').innerHTML = '<p class="text-danger">Tus gastos variables superan tus ahorros mensuales. Reconsidera tu plan.</p>';
+                return;
+            }
+
+            let totalSavings = initialSavings;
+            let months = 0;
+            const savingsData = [];
+
+            while (totalSavings < goalAmount && months < timeFrame) {
+                totalSavings += effectiveMonthlySavings;
+                totalSavings += (totalSavings * (interestRate / 100)) / 12; // Interés mensual
+                months++;
+                savingsData.push(totalSavings.toFixed(2));
+            }
+
+            if (totalSavings >= goalAmount) {
+                document.getElementById('result').innerHTML = `<p class="text-success">Con tus ahorros mensuales efectivos de $${effectiveMonthlySavings.toFixed(2)}, alcanzarás tu meta de $${goalAmount.toFixed(2)} en aproximadamente ${months} meses.</p>`;
+            } else {
+                document.getElementById('result').innerHTML = `<p class="text-warning">En el plazo de ${timeFrame} meses, alcanzarás un total de ahorro de $${totalSavings.toFixed(2)}, que está por debajo de tu meta.</p>`;
+            }
+
+            // Generar gráfico
+            const ctx = document.getElementById('savingsChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: Array.from({ length: savingsData.length }, (_, i) => i + 1),
+                    datasets: [{
+                        label: 'Evolución del Ahorro',
+                        data: savingsData,
+                        borderColor: '#007bff',
+                        backgroundColor: 'rgba(0, 123, 255, 0.1)',
+                        fill: true,
+                    }],
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'top',
+                        },
+                    },
+                    scales: {
+                        x: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Meses',
+                            },
+                        },
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Monto Ahorrado ($)',
+                            },
+                        },
+                    },
+                },
+            });
+        }
+    </script>
+</body>
+</html>
